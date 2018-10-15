@@ -1,13 +1,8 @@
 require "pry"
 
 module Concerns::Memorable
-  module ClassMethods
-    # @@all = []
-    #
-    # def self.all
-    #   @@all
-    # end
 
+  module ClassMethods
     def destroy_all
       self.all.clear
     end

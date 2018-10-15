@@ -27,4 +27,9 @@ class Genre
     song.genre = self if !song.genre
   end
 
+  def artists
+    @songs.map {|s| s.artist}.uniq
+  end
+
+
 end
