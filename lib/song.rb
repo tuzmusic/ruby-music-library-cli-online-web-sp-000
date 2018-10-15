@@ -17,19 +17,25 @@ class Song
   end
 
   def artist=(artist)
-    # binding.pry
       @artist = artist if !self.artist
       artist.add_song(self)
   end
 
   def genre=(genre)
-    # binding.pry
       @genre = genre if !self.genre
       genre.add_song(self)
   end
 
   def self.all
     @@all
+  end
+
+  def self.find_by_name(name)
+    all.find {|s| s.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
   end
 
 end
