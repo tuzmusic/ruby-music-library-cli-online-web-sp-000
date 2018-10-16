@@ -42,10 +42,11 @@ class MusicLibraryController
 
  def play_song
    puts "Which song number would you like to play?"
-   list_songs
-   num = get
-   return if num < Song.all.count
-
+  #  list_songs
+   num = gets.to_i
+   return if num > Song.all.count || num < 1
+   s = Song.all_sorted[num - 1]
+   puts "Playing #{s.name} by #{s.artist.name}" unless !s
  end
 
 
