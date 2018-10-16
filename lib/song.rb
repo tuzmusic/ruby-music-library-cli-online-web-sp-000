@@ -7,15 +7,16 @@ class Song
   include Concerns::Memorable::InstanceMethods
   extend Concerns::Findable
 
-  attr_accessor :name
+  attr_accessor :name, :filename
   attr_reader :artist, :genre
 
   @@all = []
 
-  def initialize(name, artist = nil, genre = nil)
+  def initialize(name, artist = nil, genre = nil, filename = nil)
     super
     self.artist=(artist) unless !artist
     self.genre=(genre) unless !genre
+    self.filename=(filename) unless !filename
   end
 
   def artist=(artist)
@@ -32,17 +33,21 @@ class Song
     @@all
   end
 
+  # def self.all_sorted
+  #   self.all.sort{|s1,s2| s1.name <=> s2.name}
+  # end
+
   def self.new_from_filename(filename)
     info = filename.chomp(".mp3").split(" - ")
     # binding.pry
     Song.new(info[1],
       Artist.find_or_create_by_name(info.first),
-      Genre.find_or_create_by_name(info.last))
+      Genre.find_or_create_by_name(info.last), filename)
   end
 
   def self.create_from_filename(filename)
     song = self.new_from_filename(filename)
     song.save
   end
-  
+
 end

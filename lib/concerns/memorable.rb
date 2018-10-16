@@ -7,6 +7,10 @@ module Concerns::Memorable
       self.all.clear
     end
 
+    def all_sorted
+      self.all.sort{|s1,s2| s1.name <=> s2.name}
+    end
+
     def create(name)
       s = self.new(name)
       s.save
@@ -15,7 +19,7 @@ module Concerns::Memorable
   end
 
   module InstanceMethods
-      def initialize(name, artist = nil, genre = nil)
+      def initialize(name, artist = nil, genre = nil, filename = nil)
         @name = name
       end
 
