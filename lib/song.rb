@@ -32,12 +32,17 @@ class Song
     @@all
   end
 
-  # def self.find_by_name(name)
-  #   all.find {|s| s.name == name}
-  # end
-  #
-  # def self.find_or_create_by_name(name)
-  #   self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
-  # end
+  def self.new_from_filename(filename)
+    info = filename.chomp(".mp3").split(" - ")
+    # binding.pry
+    Song.new(info[1],
+      Artist.find_or_create_by_name(info.first),
+      Genre.find_or_create_by_name(info.last))
+  end
 
+  def self.create_from_filename(filename)
+    song = self.new_from_filename(filename)
+    song.save
+  end
+  
 end
