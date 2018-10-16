@@ -27,16 +27,14 @@ class MusicLibraryController
  def list_songs_by_artist
    puts "Please enter the name of an artist:"
    name = gets
-   Song.all.select { |song| song.artist.name == name }
-     .sort {|s1,s2| s1.name <=> s2.name}
+   Song.all_sorted.select { |song| song.artist.name == name }
      .each_with_index { |s,i| puts "#{i+1}. #{s.name} - #{s.genre.name}" }
  end
 
  def list_songs_by_genre
    puts "Please enter the name of a genre:"
    name = gets
-   Song.all.select { |song| song.genre.name == name }
-     .sort {|s1,s2| s1.name <=> s2.name}
+   Song.all_sorted.select { |song| song.genre.name == name }
      .each_with_index { |s,i| puts "#{i+1}. #{s.artist.name} - #{s.name}" }
  end
 
