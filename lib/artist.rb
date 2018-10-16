@@ -1,9 +1,11 @@
 require "pry"
 require_relative "concerns/memorable.rb"
+require_relative "concerns/findable.rb"
 
 class Artist
   extend Concerns::Memorable::ClassMethods
   include Concerns::Memorable::InstanceMethods
+  extend Concerns::Findable
 
   attr_accessor :name
 

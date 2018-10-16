@@ -1,9 +1,11 @@
 require "pry"
 require_relative "concerns/memorable.rb"
+require_relative "concerns/findable.rb"
 
 class Song
   extend Concerns::Memorable::ClassMethods
   include Concerns::Memorable::InstanceMethods
+  extend Concerns::Findable
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -30,12 +32,12 @@ class Song
     @@all
   end
 
-  def self.find_by_name(name)
-    all.find {|s| s.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
-  end
+  # def self.find_by_name(name)
+  #   all.find {|s| s.name == name}
+  # end
+  #
+  # def self.find_or_create_by_name(name)
+  #   self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
+  # end
 
 end
